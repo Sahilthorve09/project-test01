@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Timetable</title>
+  <link rel="stylesheet" href="faculty-style.css" />
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Faculty</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <div class="top-info">
+      <span id="facultyNameTop">👤 Welcome, Faculty</span>
+      <div class="logout">Account <a href="../FacultyAuth/faculty-login.html">Logout</a></div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb">Home &gt; View Timetable</nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-user-graduate"></i> Faculty Panel</h3>
+      <ul>
+        <li><a href="faculty-dashboard.html">Dashboard</a></li>
+        <li><a href="view-notifications.html">View Notifications</a></li>
+        <li class="active"><a href="#">View Timetable</a></li>
+        <li><a href="faculty-students.html">My Students</a></li>
+        <li><a href="upload-marks.html">Upload Marks</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h2>📅 My Teaching Timetable</h2>
+
+      <div class="table-container">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Subject</th>
+              <th>Room No.</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody">
+            <!-- Rows will be inserted by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    // Simulate Timetable (later you can fetch from server)
+    const timetable = [
+      { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Data Structures", room: "A101" },
+      { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Operating Systems", room: "A202" },
+      { day: "Wednesday", time: "10:00 AM - 11:00 AM", subject: "Database Systems", room: "B301" },
+      { day: "Friday", time: "2:00 PM - 3:00 PM", subject: "Computer Networks", room: "B204" },
+    ];
+
+    const tbody = document.getElementById('timetableBody');
+    timetable.forEach(slot => {
+      const row = `<tr>
+        <td>${slot.day}</td>
+        <td>${slot.time}</td>
+        <td>${slot.subject}</td>
+        <td>${slot.room}</td>
+      </tr>`;
+      tbody.innerHTML += row;
+    });
+
+    // Set Faculty Name
+    const sessionData = JSON.parse(localStorage.getItem('facultySession'));
+    if (sessionData) {
+      document.getElementById('facultyNameTop').textContent = `👤 Welcome, ${sessionData.name}`;
+    } else {
+      alert('Please login first.');
+      window.location.href = "../FacultyAuth/faculty-login.html";
+    }
+  </script>
+</body>
+</html>

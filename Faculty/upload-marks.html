@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Marks</title>
+  <link rel="stylesheet" href="faculty-style.css" />
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Faculty</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <div class="top-info">
+      <span id="facultyNameTop">👤 Welcome, Faculty</span>
+      <div class="logout">Account <a href="../FacultyAuth/faculty-login.html">Logout</a></div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb">Home &gt; Upload Marks</nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-user-graduate"></i> Faculty Panel</h3>
+      <ul>
+        <li><a href="faculty-dashboard.html">Dashboard</a></li>
+        <li><a href="view-notifications.html">View Notifications</a></li>
+        <li><a href="view-timetable.html">View Timetable</a></li>
+        <li><a href="faculty-students.html">My Students</a></li>
+        <li class="active"><a href="#">Upload Marks</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h2>📝 Upload Marks</h2>
+
+      <div class="card">
+        <form id="marksForm" class="upload-form">
+          <div class="form-group">
+            <label for="subject">Select Subject:</label>
+            <select id="subject" required>
+              <option value="">-- Select Subject --</option>
+              <option value="Data Structures">Data Structures</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="Database Systems">Database Systems</option>
+              <option value="Computer Networks">Computer Networks</option>
+            </select>
+          </div>
+
+          <div class="table-container" style="margin-top:20px;">
+            <table class="student-table">
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Marks (out of 100)</th>
+                </tr>
+              </thead>
+              <tbody id="marksTableBody">
+                <!-- Students will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+
+          <button type="submit" class="btn-post" style="margin-top:20px;">Submit Marks</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    const students = [
+      { roll: "BTECH001", name: "Amit Sharma", course: "B.Tech", semester: "Semester 5" },
+      { roll: "BTECH002", name: "Sneha Patil", course: "B.Tech", semester: "Semester 5" },
+      { roll: "MBA003", name: "Rahul Mehra", course: "MBA", semester: "Semester 3" },
+      { roll: "MTECH004", name: "Pooja Singh", course: "M.Tech", semester: "Semester 2" },
+      { roll: "MCA005", name: "Karan Deshmukh", course: "MCA", semester: "Semester 4" }
+    ];
+
+    const tbody = document.getElementById('marksTableBody');
+    const sessionData = JSON.parse(localStorage.getItem('facultySession'));
+
+    if (sessionData) {
+      document.getElementById('facultyNameTop').textContent = `👤 Welcome, ${sessionData.name}`;
+
+      // Filter students for this faculty
+      const assignedStudents = students.filter(stu => 
+        stu.course === sessionData.course && stu.semester === sessionData.semester
+      );
+
+      assignedStudents.forEach(stu => {
+        const row = `<tr>
+          <td>${stu.roll}</td>
+          <td>${stu.name}</td>
+          <td><input type="number" min="0" max="100" required id="mark-${stu.roll}" placeholder="Enter marks" style="width: 100px; padding: 5px;"></td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+
+    } else {
+      alert('Please login first.');
+      window.location.href = "../FacultyAuth/faculty-login.html";
+    }
+
+    // Handle form submit
+    document.getElementById('marksForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const subject = document.getElementById('subject').value;
+      if (!subject) {
+        alert('Please select a subject.');
+        return;
+      }
+
+      const submittedMarks = [];
+
+      assignedStudents.forEach(stu => {
+        const mark = document.getElementById(`mark-${stu.roll}`).value;
+        submittedMarks.push({
+          roll: stu.roll,
+          name: stu.name,
+          marks: mark,
+          subject: subject
+        });
+      });
+
+      // Save marks in localStorage (later connect to database)
+      localStorage.setItem('facultyMarks', JSON.stringify(submittedMarks));
+
+      alert('Marks uploaded successfully!');
+      this.reset();
+      tbody.innerHTML = "";
+    });
+  </script>
+</body>
+</html>

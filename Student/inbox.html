@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Inbox</title>
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png">  
+  <link rel="stylesheet" href="Student-css/inboxstyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Exams</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div> <!-- THIS LINE -->
+    <div class="top-info">
+      <div class="student-id">Student ID: <strong>ST0065</strong></div>
+      <div class="welcome">Welcome To <strong>Student Name</strong></div>
+      <div class="logout">Account <a href="../index.html">Logout</a></div>
+    </div>
+  </header>
+  
+
+  <nav class="path">
+    Home &gt; <span>Inbox</span>
+  </nav>
+
+  <div class="dashboard">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-user"></i> Student Menu</h3>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active"><a href="inbox.html">Inbox</a></li>
+        <li><a href="contact-admin.html">Contact Admin</a></li>
+        <li><a href="my-exams.html">My Exams</a></li>
+        <li><a href="exam-report.html">Exam Reports</a></li>
+        <li><a href="study-materials.html">Study Materials</a></li>
+        <li><a href="notifications.html">Notifications</a></li>
+        <li><a href="hallticket.html">Hall-Ticket</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="card">
+        <h2><i class="fas fa-envelope"></i> My <span style="color:#f44336;">Inbox</span></h2>
+        <div class="table-controls">
+          <label>Show 
+            <select>
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+            </select> entries
+          </label>
+          <input type="text" placeholder="Search Here" />
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>hello testing</td>
+              <td>Helllo</td>
+              <td>10-Oct-2020<br>04:42 PM<br>Saturday</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>testing</td>
+              <td>this test</td>
+              <td>08-Oct-2020<br>02:37 PM<br>Thursday</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>testing this message</td>
+              <td>test</td>
+              <td>08-Oct-2020<br>02:32 PM<br>Thursday</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('active');  
+    }
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+  </script>
+  
+</body>
+</html>

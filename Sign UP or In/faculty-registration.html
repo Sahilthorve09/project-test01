@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Registration</title>
+  <link rel="stylesheet" href="faculty-style.css" /> 
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png"> 
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body style="background: #f4f6f8;">
+  <div class="form-container">
+    <h2>🧑‍🏫 Faculty Registration</h2>
+
+    <form id="registrationForm" class="upload-form">
+      <div class="form-group">
+        <label for="facultyName">Full Name:</label>
+        <input type="text" id="facultyName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="facultyEmail">Email Address:</label>
+        <input type="email" id="facultyEmail" required />
+      </div>
+
+      <div class="form-group">
+        <label for="facultyPassword">Password:</label>
+        <input type="password" id="facultyPassword" required />
+      </div>
+
+      <div class="form-group">
+        <label for="facultyCourse">Course Assigned:</label>
+        <select id="facultyCourse" required>
+          <option value="">-- Select --</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="MBA">MBA</option>
+          <option value="MCA">MCA</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="facultySemester">Semester Assigned:</label>
+        <select id="facultySemester" required>
+          <option value="">-- Select --</option>
+          <option value="Semester 1">Semester 1</option>
+          <option value="Semester 2">Semester 2</option>
+          <option value="Semester 3">Semester 3</option>
+          <option value="Semester 4">Semester 4</option>
+          <option value="Semester 5">Semester 5</option>
+          <option value="Semester 6">Semester 6</option>
+          <option value="Semester 7">Semester 7</option>
+          <option value="Semester 8">Semester 8</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-post">Register</button>
+    </form>
+
+    <p style="margin-top:20px;">Already registered? <a href="faculty-login.html">Login Here</a></p>
+  </div>
+
+  <script>
+    // Save Faculty Data in LocalStorage
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('facultyName').value;
+      const email = document.getElementById('facultyEmail').value;
+      const password = document.getElementById('facultyPassword').value;
+      const course = document.getElementById('facultyCourse').value;
+      const semester = document.getElementById('facultySemester').value;
+
+      const facultyData = {
+        name: name,
+        email: email,
+        password: password,
+        course: course,
+        semester: semester
+      };
+
+      // Save to localStorage (simulate database)
+      localStorage.setItem('facultyData', JSON.stringify(facultyData));
+
+      alert('Registration Successful!');
+      window.location.href = "faculty-login.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile</title>
+  <link rel="stylesheet" href="faculty-style.css" />
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Faculty</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <div class="top-info">
+      <span id="facultyNameTop">👤 Welcome, Faculty</span>
+      <div class="logout">Account <a href="../FacultyAuth/faculty-login.html">Logout</a></div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb">Home &gt; My Profile</nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-user-graduate"></i> Faculty Panel</h3>
+      <ul>
+        <li><a href="faculty-dashboard.html">Dashboard</a></li>
+        <li><a href="view-notifications.html">View Notifications</a></li>
+        <li><a href="view-timetable.html">View Timetable</a></li>
+        <li><a href="faculty-students.html">My Students</a></li>
+        <li><a href="upload-marks.html">Upload Marks</a></li>
+        <li class="active"><a href="#">Profile</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h2>👤 My Profile</h2>
+
+      <div class="card">
+        <form id="profileForm" class="upload-form">
+          <div class="form-group">
+            <label for="facultyName">Name:</label>
+            <input type="text" id="facultyName" required />
+          </div>
+
+          <div class="form-group">
+            <label for="facultyEmail">Email:</label>
+            <input type="email" id="facultyEmail" readonly />
+          </div>
+
+          <div class="form-group">
+            <label for="facultyCourse">Course:</label>
+            <input type="text" id="facultyCourse" readonly />
+          </div>
+
+          <div class="form-group">
+            <label for="facultySemester">Semester:</label>
+            <input type="text" id="facultySemester" readonly />
+          </div>
+
+          <div class="form-group">
+            <label for="facultyPassword">Password:</label>
+            <input type="password" id="facultyPassword" required />
+          </div>
+
+          <button type="submit" class="btn-post">Update Profile</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    // Load faculty data
+    const sessionData = JSON.parse(localStorage.getItem('facultySession'));
+    const storedFaculty = JSON.parse(localStorage.getItem('facultyData'));
+
+    if (sessionData && storedFaculty) {
+      document.getElementById('facultyNameTop').textContent = `👤 Welcome, ${sessionData.name}`;
+      document.getElementById('facultyName').value = storedFaculty.name;
+      document.getElementById('facultyEmail').value = storedFaculty.email;
+      document.getElementById('facultyCourse').value = storedFaculty.course;
+      document.getElementById('facultySemester').value = storedFaculty.semester;
+      document.getElementById('facultyPassword').value = storedFaculty.password;
+    } else {
+      alert('Please login first.');
+      window.location.href = "../FacultyAuth/faculty-login.html";
+    }
+
+    // Handle profile update
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const updatedName = document.getElementById('facultyName').value.trim();
+      const updatedPassword = document.getElementById('facultyPassword').value.trim();
+
+      if (updatedName === '' || updatedPassword === '') {
+        alert('Name and Password cannot be empty.');
+        return;
+      }
+
+      // Update in localStorage
+      const updatedFaculty = {
+        ...storedFaculty,
+        name: updatedName,
+        password: updatedPassword
+      };
+      localStorage.setItem('facultyData', JSON.stringify(updatedFaculty));
+
+      // Also update session name
+      const updatedSession = {
+        ...sessionData,
+        name: updatedName
+      };
+      localStorage.setItem('facultySession', JSON.stringify(updatedSession));
+
+      alert('Profile updated successfully!');
+      location.reload();
+    });
+  </script>
+</body>
+</html>

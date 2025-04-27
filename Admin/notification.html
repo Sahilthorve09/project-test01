@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Notification</title>
+  <link rel="stylesheet" href="admin-style.css" />
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png"> 
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Admin</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <div class="top-info">
+      <span><i class="fas fa-user-shield"></i> Welcome, Admin</span>
+      <div class="logout">Account <a href="../index.html">Logout</a></div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb">Home &gt; Post Notification</nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-cogs"></i> Admin Panel</h3>
+      <ul>
+        <li><a href="admin.html">Dashboard</a></li>
+        <li class="active"><a href="#">Post Notification</a></li>
+        <li><a href="upload-timetable.html">Upload Timetable</a></li>
+        <li><a href="upload-hallticket.html">Upload Hall Tickets</a></li>
+        <li><a href="student-list.html">Student List</a></li>
+        <li><a href="publish-result.html">Publish Results</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="card">
+        <h2>📢 Post New Notification</h2>
+        <form class="notification-form">
+          <div class="form-group">
+            <label for="title">Notification Title:</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Notification Message:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="audience">Select Audience:</label>
+            <select id="audience" name="audience" required>
+              <option value="">-- Select --</option>
+              <option value="All Students">All Students</option>
+              <option value="Exam Department">Exam Department</option>
+              <option value="Faculty">Faculty</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-post">Post Notification</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    document.querySelector('.notification-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Notification posted successfully!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

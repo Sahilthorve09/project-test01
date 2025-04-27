@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration</title>
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png"> 
+  <link rel="stylesheet" href="student-register.css" />
+  <script defer src="admin-register.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>🎓 Student Registration Form</h2>
+    <form id="registrationForm">
+      <label>Faculty Name</label>
+      <input type="text" id="name" required />
+
+      <label>Faculty Email</label>
+      <input type="email" id="email" required />
+
+      <label>Class</label>
+      <input type="text" id="class" required />
+
+      <label>Faculty ID</label>
+      <input type="text" id="id" required />
+
+      <label>Phone Number</label>
+      <input type="tel" id="personal" required />
+
+      <label>Create Password</label>
+      <input type="password" id="password" required />
+
+      <label>Solve CAPTCHA: <span id="captchaBox"></span></label>
+      <input type="text" id="captchaInput" placeholder="Enter answer" required />
+
+      <button type="submit"></a>Register</button>
+
+      <h4 class="ar"><a href="admin-login.html">already Register</a></h4>
+    </form>
+
+    <p id="msg" class="message"></p>
+  </div>
+</body>
+</html>

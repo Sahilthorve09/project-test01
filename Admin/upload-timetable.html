@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Timetable</title>
+  <link rel="stylesheet" href="admin-style.css" />
+  <link rel="icon" type="image/png" href="../Public/favicom/logo.png"> 
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">Alard <span>Admin</span> Portal</div>
+    <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+    <div class="top-info">
+      <span><i class="fas fa-user-shield"></i> Welcome, Admin</span>
+      <div class="logout">Account <a href="../index.html">Logout</a></div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb">Home &gt; Upload Timetable</nav>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="close-btn" onclick="toggleSidebar()">✖</div>
+      <h3><i class="fas fa-cogs"></i> Admin Panel</h3>
+      <ul>
+        <li><a href="admin.html">Dashboard</a></li>
+        <li><a href="post-notification.html">Post Notification</a></li>
+        <li class="active"><a href="#">Upload Timetable</a></li>
+        <li><a href="upload-hallticket.html">Upload Hall Tickets</a></li>
+        <li><a href="student-list.html">Student List</a></li>
+        <li><a href="publish-result.html">Publish Results</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="card">
+        <h2>🗓️ Upload Exam Timetable</h2>
+        <form class="upload-form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="course">Select Course:</label>
+            <select id="course" name="course" required>
+              <option value="">-- Select --</option>
+              <option value="B.Tech">B.Tech</option>
+              <option value="M.Tech">M.Tech</option>
+              <option value="MBA">MBA</option>
+              <option value="MCA">MCA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="semester">Select Semester:</label>
+            <select id="semester" name="semester" required>
+              <option value="">-- Select --</option>
+              <option value="Semester 1">Semester 1</option>
+              <option value="Semester 2">Semester 2</option>
+              <option value="Semester 3">Semester 3</option>
+              <option value="Semester 4">Semester 4</option>
+              <option value="Semester 5">Semester 5</option>
+              <option value="Semester 6">Semester 6</option>
+              <option value="Semester 7">Semester 7</option>
+              <option value="Semester 8">Semester 8</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timetable-file">Upload Timetable (PDF):</label>
+            <input type="file" id="timetable-file" name="timetable-file" accept="application/pdf" required />
+          </div>
+
+          <button type="submit" class="btn-post">Upload Timetable</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    document.querySelector('.upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('timetable-file');
+      if (fileInput.files.length === 0) {
+        alert('Please select a timetable file.');
+      } else {
+        alert('Timetable uploaded successfully!');
+        this.reset();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #f4f7fa;
+  }
+  
+  .top-bar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .logo span {
+    color: orange;
+  }
+  
+  .top-info {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .top-info i {
+    margin-right: 5px;
+  }
+  
+  .top-info a {
+    text-decoration: none;
+    color: #007b83;
+    font-weight: 500;
+  }
+  
+  .path {
+    background-color: #00529b;
+    color: white;
+    padding: 0.6rem 2rem;
+    font-size: 0.95rem;
+  }
+  
+  .dashboard-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 260px;
+    background-color: #003366;
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+  }
+  
+  .sidebar h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 12px 20px;
+  }
+  
+  .sidebar ul li.active,
+  .sidebar ul li:hover {
+    background: #1565c0;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .profile-card img {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-card h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-card h2 span {
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    gap: 1rem;
+  }
+  
+  .card {
+    width: 30%;
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .card.green {
+    background-color: #6b9b3f;
+  }
+  
+  .card.blue {
+    background-color: #27aeae;
+  }
+  
+  .card.orange {
+    background-color: #f39c12;
+  }
+  
+  .buy-btn {
+    background-color: #00529b;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .buy-btn:hover {
+    background-color: #003f7d;
+  }
+  
+  /* ------------------- RESPONSIVE DESIGN ------------------- */
+
+@media (max-width: 1024px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .top-info {
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .path {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .sidebar h3 {
+    font-size: 1rem;
+  }
+
+  .sidebar ul li {
+    padding: 10px 15px;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  .buy-btn {
+    width: 100%;
+  }
+}
+
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    color: #003366;
+    margin-top: 0.5rem;
+  }
+
+  .sidebar {
+    display: none;
+    width: 100%;
+    background-color: #003366;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    display: block;
+  }
+
+  .dashboard-container {
+    flex-direction: column;
+  }
+}
+
+/* Close button (for mobile sidebar) */
+.close-btn {
+  display: none;
+  text-align: right;
+  font-size: 24px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .close-btn {
+    display: block;
+  }
+}
